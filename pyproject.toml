@@ -1,0 +1,7 @@
+# pyproject.toml
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"] # E=pycodestyle errors, F=pyflakes, W=warnings, I=isort
+
+[tool.ruff.format]
+quote-style = "double"

@@ -1,0 +1,7 @@
+{
+  "version": "test.1",
+  "buckets": {
+    "line": ["a", "b"],
+    "palette": ["c", "d"]
+  }
+}

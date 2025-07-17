@@ -1,0 +1,25 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  dev:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    
+    # Keep the container running and allow for an interactive shell
+    tty: true
+    stdin_open: true
+    
+    # Mount the entire project directory into the container's /app folder
+    # This means changes to your local code are instantly reflected inside the container
+    volumes:
+      - ./:/app
+      
+    # This section enables NVIDIA GPU access for the container
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
