@@ -1,0 +1,3 @@
+### For scraping, we will keep it mostly manual. It doesn't make sense to automatically scrape websites and introduce garbage into datasets. The whole point of this repo is the testing of the hypothesis that data and curation are extremely important in the generative/creative ai pipeline. 
+
+# Will probably just upload everything into a single directory. Set up so that it handles both images and videos. For videos, we will use a library to auto parse frames from a given video. Also need to try to find a library that allows auto-cropping to handle watermarks. 

@@ -1,0 +1,10 @@
+{
+  "version": "1.1",
+  "buckets": {
+    "category":   ["hyper-realist","illustration","clothing","portrait","anime","chibi"],
+    "mood":    ["violent","lullaby","silly","intense","digital","organic"],
+    "attire":  ["gothic","modern","street","medieval","fantasy","futuristic"],
+    "style": ["highly-detailed","minimal","ornate","high-contrast","simple","medical"],
+    "angle":   ["eye_level","low_angle","high_angle","dutch_tilt","overhead","macro_close"]
+  }
+}
