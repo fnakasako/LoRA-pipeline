@@ -4,27 +4,38 @@ from pathlib import Path
 import json
 from typing import Dict, List
 
-class Ontology(BaseModel):
-    """A Pydantic model to validate and load the style ontology."""
-    version: str
-    buckets: Dict[str, List[str]]
+class Token(BaseModel):
+    """A model for a single token with its description."""
+    token: str
+    description: str
 
-    @validator('buckets')
-    def check_bucket_content(cls, buckets):
-        if not buckets:
-            raise ValueError("Ontology must contain at least one bucket.")
-        for name, tokens in buckets.items():
-            if not tokens:
-                raise ValueError(f"Bucket '{name}' cannot be empty.")
-            if len(set(tokens)) != len(tokens):
-                raise ValueError(f"Tokens in bucket '{name}' must be unique.")
-        return buckets
+class Bucket(BaseModel):
+    """A model for a bucket containing a description and a list of tokens."""
+    description: str
+    tokens: List[Token]
+
+    @validator('tokens')
+    def check_tokens(cls, tokens):
+        if not tokens:
+            raise ValueError("Bucket must contain at least one token.")
+        
+        # Check for duplicate token names within the same bucket
+        token_names = [t.token for t in tokens]
+        if len(set(token_names)) != len(token_names):
+            raise ValueError("Tokens in a bucket must have unique names.")
+        return tokens
+
+class Ontology(BaseModel):
+    """A Pydantic model to validate and load the rich style ontology."""
+    version: str
+    buckets: Dict[str, Bucket]
 
     def get_all_tokens(self) -> set[str]:
-        """Returns a flat set of all tokens from all buckets."""
+        """Returns a flat set of all token names from all buckets."""
         all_tokens = set()
-        for tokens in self.buckets.values():
-            all_tokens.update(tokens)
+        for bucket in self.buckets.values():
+            for token_obj in bucket.tokens:
+                all_tokens.add(token_obj.token)
         return all_tokens
 
 def load_ontology(path: Path) -> Ontology:
@@ -41,13 +52,12 @@ def load_ontology(path: Path) -> Ontology:
 
 if __name__ == '__main__':
     # Example usage:
-    # Assumes your ontology is in 'configs/ontology.json' relative to the repo root.
     repo_root = Path(__file__).parent.parent.parent
     ontology_path = repo_root / "configs" / "ontology.json"
     
     try:
         ontology = load_ontology(ontology_path)
         print(f"Total unique tokens: {len(ontology.get_all_tokens())}")
-        # print("Buckets:", ontology.buckets)
+        # print("First bucket description:", ontology.buckets['photography'].description)
     except Exception as e:
         print(f"❌ Error loading ontology: {e}")

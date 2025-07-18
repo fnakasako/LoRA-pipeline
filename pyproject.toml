@@ -1,7 +1,24 @@
 # pyproject.toml
 [tool.ruff]
-line-length = 88
-select = ["E", "F", "W", "I"] # E=pycodestyle errors, F=pyflakes, W=warnings, I=isort
+line-length = 120
+
+
 
 [tool.ruff.format]
 quote-style = "double"
+
+[tool.ruff.lint]
+# Ignore specific error codes. Add any other annoying ones here.
+ignore = [
+    "E501",  # Line too long
+]
+select = [
+    "E",  # Pyflakes errors
+    "F",  # Pyflakes errors
+    "I",  # isort (import sorting)
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
