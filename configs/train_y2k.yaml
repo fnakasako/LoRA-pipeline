@@ -1,0 +1,4 @@
+base_model_path: "stabilityai/stable-diffusion-xl-base-1.0"
+vae_model_path: "madebyollin/sdxl-vae-fp16-fix"
+learning_rate: 1e-4
+lora_rank: 4

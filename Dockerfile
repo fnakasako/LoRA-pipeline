@@ -10,6 +10,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     libmagic1 \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy ONLY the requirements file first to leverage Docker's caching

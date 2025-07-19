@@ -14,4 +14,12 @@ services:
     # This means changes to your local code are instantly reflected inside the container
     volumes:
       - ./:/app
-  
+      
+    # This section enables NVIDIA GPU access for the container
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

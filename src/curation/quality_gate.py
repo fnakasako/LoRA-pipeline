@@ -10,7 +10,7 @@ import cv2
 CASCADE_PATH = "haarcascade_frontalface_default.xml"
 
 
-def run_quality_gate(image_dir: Path, min_resolution: int = 1280, blur_threshold: float = 100.0):
+def run_quality_gate(image_dir: Path, min_resolution: int = 600, blur_threshold: float = 100.0):
     """
     Filters images in a directory based on resolution, blurriness, and face detection.
     Moves failed images to a 'rejected' subdirectory.
@@ -37,7 +37,7 @@ def run_quality_gate(image_dir: Path, min_resolution: int = 1280, blur_threshold
 
             # 1. Resolution Check
             height, width, _ = image.shape
-            if width < min_resolution and height < min_resolution:
+            if min(width, height) < min_resolution: # <--- NEW, BETTER LOGIC
                 shutil.move(image_path, rejected_dir / image_path.name)
                 print(f"-> Rejected {image_path.name}: Low resolution ({width}x{height})")
                 rejected_count += 1

@@ -35,7 +35,9 @@ def auto_caption_dataset(
 
     # Load description model
     desc_processor = BlipProcessor.from_pretrained(desc_model_name)
-    desc_model = BlipForConditionalGeneration.from_pretrained(desc_model_name).to(device)
+    desc_model = BlipForConditionalGeneration.from_pretrained(
+        desc_model_name, torch_dtype=torch.float16
+    ).to(device)
 
     # 2. Pre-compute embeddings for all ontology tokens
     token_embeddings = {token: clip_model.encode(token.replace("_", " ")) for token in ontology.get_all_tokens()}
@@ -51,15 +53,16 @@ def auto_caption_dataset(
             image_embedding = clip_model.encode(image)
 
             best_tokens = []
-            for bucket_name, tokens_in_bucket in ontology.buckets.items():
-                bucket_token_embeddings = np.array([token_embeddings[t] for t in tokens_in_bucket])
+            for bucket_name, bucket_obj in ontology.buckets.items():
+                token_list = [t.token for t in bucket_obj.tokens]
+                bucket_token_embeddings = np.array([token_embeddings[t] for t in token_list])
 
                 # Calculate cosine similarities
                 similarities = util.cos_sim(image_embedding, bucket_token_embeddings)[0]
 
                 # Find the best token in the current bucket
                 best_token_index = torch.argmax(similarities)
-                best_tokens.append(tokens_in_bucket[best_token_index])
+                best_tokens.append(token_list[best_token_index])
 
             style_tags_str = f"[style:{','.join(best_tokens)}]"
 

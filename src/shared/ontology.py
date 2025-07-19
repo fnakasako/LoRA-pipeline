@@ -50,6 +50,10 @@ def load_ontology(path: Path) -> Ontology:
     print(f"✅ Ontology '{path.name}' v{ontology.version} loaded successfully.")
     return ontology
 
+REPO_ROOT = Path(__file__).parent.parent.parent
+ONTOLOGY_PATH = REPO_ROOT / "configs" / "ontology.json"
+ontology = load_ontology(ONTOLOGY_PATH)
+
 if __name__ == '__main__':
     # Example usage:
     repo_root = Path(__file__).parent.parent.parent
