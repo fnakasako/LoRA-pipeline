@@ -1,0 +1,24 @@
+{
+  "version": "y2k-dollhouse-1.0",
+  "buckets": {
+    "photography": [
+      { "token": "lo_fi_digital_snapshot", "description": "Looks like a candid from an early 2000s digital camera or phone." },
+      { "token": "hazy_dreamlike_lighting", "description": "Soft, diffused light with a hazy or glowing quality, often with lens flare or sparkles." },
+      { "token": "intimate_bedroom_setting", "description": "Shot in a personal, private space like a bedroom, often on a bed or floor." },
+      { "token": "vhs_screengrab_quality", "description": "Degraded quality reminiscent of a pause-taped VHS movie, with color bleed and low resolution." }
+    ],
+    "fashion_style": [
+      { "token": "dollette_aesthetic", "description": "Coquette, doll-like clothing; features lace, ruffles, pastel pinks, and sheer fabrics." },
+      { "token": "y2k_camisole_top", "description": "A thin-strapped camisole or tank top, often with lace trim." },
+      { "token": "ruffled_bloomers", "description": "Frilly, lingerie-like shorts or bloomers." },
+      { "token": "balletcore", "description": "Incorporates elements of ballet wear, like leg warmers, ribbons, and bodysuits." }
+    ],
+    "subject_presentation": [
+      { "token": "delicate_and_feminine", "description": "The subject is posed in a soft, graceful, or fragile manner." },
+      { "token": "coy_gaze", "description": "A shy, playful, or subtly alluring look, often not directly at the camera." },
+      { "token": "holding_plush_toy", "description": "Features a stuffed animal or doll as a prop, enhancing the childlike aesthetic." },
+      { "token": "unposed_intimacy", "description": "A sense of capturing a private, un-performative moment." }
+      { "token": "aggresive_confident", "description": "Posturing of the subject is aggresive and confident." }
+    ]
+  }
+}
